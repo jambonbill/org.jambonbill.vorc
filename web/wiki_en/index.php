@@ -12,7 +12,7 @@ echo $admin;
 $VORC=new VORC\Vorc();
 ?>
 <section class="content-header">
-  <h1><i class='fa fa-wiki'></i> WIKI</h1>
+  <h1><i class='fa fa-wikipedia-w'></i> WIKI </h1>
 </section>
 
 
@@ -20,7 +20,7 @@ $VORC=new VORC\Vorc();
 <?php
 
 // Search //
-
+include "box_search.php";
 
 
 // FIND //
@@ -29,26 +29,35 @@ echo "<pre>$sql</pre>";
 
 $q=$VORC->db()->query($sql) or die("Error:".print_r($VORC->db()->errorInfo(), true)."<hr />$sql");
 
-
-echo "<table class='table table-condensed'>";
-echo "<thead>";
-echo "<th>Name</th>";
-echo "<th>Categ</th>";
-echo "<th>User</th>";
-echo "<th>Updated</th>";
-echo "</thead>";
-echo "<tbody>";
+$htm=[];
+$htm[]="<table class='table table-condensed'>";
+$htm[]= "<thead>";
+$htm[]= "<th>Name</th>";
+$htm[]= "<th>Categ</th>";
+$htm[]= "<th>User</th>";
+$htm[]= "<th>Updated</th>";
+$htm[]= "</thead>";
+$htm[]= "<tbody>";
 while($r=$q->fetch(PDO::FETCH_ASSOC)){
 	//print_r($r);
-	echo "<tr>";
-	echo "<td>".$r['name_wikipage'];
-	echo "<td>".$r['flag_category'];
-	echo "<td>".$r['user_modified'];
+	$htm[]= "<tr>";
+	$htm[]= "<td>".$r['name_wikipage'];
+	$htm[]= "<td>".$r['flag_category'];
+	$htm[]= "<td>".$r['user_modified'];
 	$t=strtotime($r['lastupdate']);
-	echo "<td>".date("Y-m-d",$t);
+	$htm[]= "<td>".date("Y-m-d",$t);
 }
-echo "</tbody>";
-echo "</table>";
+$htm[]= "</tbody>";
+$htm[]= "</table>";
+
+
+
+$box=new LTE\Box;
+$box->title("Result");
+$box->icon("fa fa-list");
+$box->body($htm);
+echo $box;
+
 
 $admin->footer("Vorc backup");
 $admin->end();
