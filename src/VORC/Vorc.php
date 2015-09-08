@@ -20,4 +20,18 @@ class Vorc
     {
         return $this->db;
     }
+
+
+
+    public function categories()
+    {
+        return [];
+    }
+
+
+    public function platforms()
+    {
+        return [];
+    }
+
 }
