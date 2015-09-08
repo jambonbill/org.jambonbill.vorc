@@ -22,16 +22,50 @@ class Vorc
     }
 
 
+    public function users()
+    {
+        $sql="SELECT DISTINCT user_created FROM wiki_en WHERE 1 ORDER BY user_created;";
+        $q=$this->db()->query($sql) or die("Error: $sql");
+        $dat=[];
+        while($r=$q->fetch()){
+            @$dat[$r['user_created']]=$r['user_created'];
+        }
+        //sort($dat);
+        return $dat;
+    }
+
 
     public function categories()
     {
-        return [];
+        $sql="SELECT DISTINCT flag_category FROM wiki_en WHERE 1;";
+        $q=$this->db()->query($sql) or die("Error: $sql");
+        $categs=[];
+        while($r=$q->fetch()){
+            $x=explode(";",$r['flag_category']);
+            foreach($x as $k=>$v){
+                if(!$v)continue;
+                @$categs["$v"]++;
+            }
+        }
+        ksort($categs);
+        return $categs;
     }
 
 
     public function platforms()
     {
-        return [];
+        $sql="SELECT DISTINCT flag_platform FROM wiki_en WHERE 1;";
+        $q=$this->db()->query($sql) or die("Error: $sql");
+        $dat=[];
+        while($r=$q->fetch()){
+            $x=explode(";",$r['flag_platform']);
+            foreach($x as $k=>$v){
+                if(!$v)continue;
+                @$dat["$v"]++;
+            }
+        }
+        ksort($dat);
+        return $dat;
     }
 
 }
