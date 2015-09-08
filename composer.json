@@ -1,0 +1,22 @@
+{
+	"name":"vorc.jambonbill.org",
+	"authors": [
+        {
+            "name": "Jambonbill",
+            "email": "jambonbill@gmail.com",
+            "homepage": "https://github.com/jambonbill"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "LTE": "src/",
+            "PDO": "src/",
+            "VORC": "src/"
+        }
+    },
+    "require": {
+        "php": ">=5.5.9",
+        "monolog/monolog": "~1.1",
+        "ext-pdo": "*"
+    }
+}
