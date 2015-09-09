@@ -1,5 +1,5 @@
 {
-	"title":"VORC",
+	"title":"VORC READONLY",
 	"homeurl":"index.php",
 	"favicon":"img/favicon.png",
 	"menusearch":false,
@@ -28,40 +28,24 @@
 	   		"class":"header"
 	   	},
 	   	   
-	   "news":{
-			"text":"News",
-			"url":"news_en/index.php"
-	   	},
-
 	   	"wiki":{
 			"text":"Wiki",
 			"url":"wiki_en/index.php"
 	   	},
 
-		"tune":{
-			"text":"Tunes",
-			"url":"tunes_en/index.php"
-	   	},
+		
 
 	   	"japanese":{
 	   		"text":"Japanese",
 	   		"class":"header"
 	   	},
 
-	   "news2":{
-			"text":"News",
-			"url":"news_jp/index.php"
-	   	},
 		
 		"wiki2":{
 			"text":"Wiki",
 			"url":"wiki_jp/index.php"
 	   	},
 
-		"tune2":{
-			"text":"Tunes",
-			"url":"tunes_jp/index.php"
-	   	},
 
 	   "separator":{
 	   		"text":"Separator",
