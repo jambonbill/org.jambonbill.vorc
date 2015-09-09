@@ -16,6 +16,9 @@ $sql="SELECT * FROM wiki_en WHERE id=$id;";
 $q=$VORC->db()->query($sql) or die("Error: $sql");
 $r=$q->fetch(PDO::FETCH_ASSOC);
 
+if(!$r)die("Error : Wiki page not found");
+
+
 ?>
 <section class="content-header">
   <h1><i class='fa fa-font'></i> <?php echo $r['name_wikipage']?></h1>
