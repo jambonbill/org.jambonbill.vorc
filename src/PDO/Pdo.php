@@ -29,7 +29,10 @@ class Pdo
             // Load configuration
             $config = json_decode(file_get_contents(__DIR__."/config.json"));
 
-            //echo "<pre>";print_r($config);exit;
+            if ($err=json_last_error()) {
+                die("Error: Invalid config.json");
+            }
+
 
             self::$db_host = $config->pdo->host;
             self::$db_name = $config->pdo->name;
