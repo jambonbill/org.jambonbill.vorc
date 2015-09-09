@@ -68,4 +68,20 @@ class Vorc
         return $dat;
     }
 
+    public function wikiEnCount()
+    {
+        $sql="SELECT COUNT(*) FROM wiki_en WHERE 1;";
+        $q=$this->db()->query($sql) or die("Error: $sql");
+        $r=$q->fetch(\PDO::FETCH_ASSOC);
+        return $r['COUNT(*)'];
+    }
+
+    public function wikiJpCount()
+    {
+        $sql="SELECT COUNT(*) FROM wiki_jp WHERE 1;";
+        $q=$this->db()->query($sql) or die("Error: $sql");
+        $r=$q->fetch(\PDO::FETCH_ASSOC);
+        return $r['COUNT(*)'];
+    }
+
 }
