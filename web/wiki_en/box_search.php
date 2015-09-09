@@ -11,7 +11,7 @@ $htm=[];
 $htm[]="<div class='row'>";
 
 $htm[]="<div class='col-md-3'>";
-$htm[]="<input type='text' class='form-control' placeholder='Search wiki'>";
+$htm[]="<input type='text' class='form-control' placeholder='Search wiki' id='search'>";
 $htm[]="</div>";
 
 $htm[]="<div class='col-md-2'>";
@@ -30,19 +30,41 @@ foreach($VORC->users() as $val)$htm[]="<option value='$val'>".ucfirst($val)."</o
 $htm[]="</select></div>";
 
 $htm[]="<div class='col-md-3'>";
-$htm[]="<input type='date' class='form-control'>";
+$htm[]="<input type='date' id=date class='form-control'>";
 $htm[]="</div>";
 
 $htm[]="</div>";
 
 $box=new LTE\Box;
+$box->id("boxSearch");
 $box->title("Search wiki");
 $box->icon("fa fa-search");
+$box->boxTools("<a href=# class='btn' title='Clear'>x</a>");
 $box->body($htm);
 echo $box;
 ?>
+<div id='more'></div>
 <script>
 $(function(){
-	
+	$('#search,#category,#platform,#user,#date').change(function(){
+		console.log('change');
+		searchWiki();
+	});
+
+	var searchWiki=function(){
+
+		var p={
+			'do':'search',
+			'search':$('#search').val(),
+			'category':$('#category').val(),
+			'platform':$('#platform').val(),
+			'user':$('#user').val(),
+			'date':$('#date').val()
+		}
+		$('#boxResult .box-body').load('ctl.php',p,function(){
+
+		});
+	}
+	searchWiki();
 });
 </script>
