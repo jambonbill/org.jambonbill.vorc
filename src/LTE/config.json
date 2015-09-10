@@ -27,7 +27,12 @@
 	   		"text":"English",
 	   		"class":"header"
 	   	},
-	   	   
+	   	
+	   	"news1":{
+			"text":"News",
+			"url":"news_en/index.php"
+	   	},
+
 	   	"wiki":{
 			"text":"Wiki",
 			"url":"wiki_en/index.php"
