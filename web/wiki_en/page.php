@@ -97,4 +97,5 @@ $box->footer("<a href=index.php class='btn btn-default'><i class='fa fa-arrow-le
 echo $box;
 
 
-//echo "<hr /><pre>";print_r($r);exit;
+$admin->footer("Vorc backup");
+$admin->end();

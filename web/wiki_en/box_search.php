@@ -26,7 +26,7 @@ $htm[]="</select></div>";
 
 $htm[]="<div class='col-md-2'>";
 $htm[]="<select class='form-control' id=user><option value=''>By</option>";
-foreach($VORC->users() as $val)$htm[]="<option value='$val'>".ucfirst($val)."</option>";
+foreach($VORC->wikiUsers() as $val)$htm[]="<option value='$val'>".ucfirst($val)."</option>";
 $htm[]="</select></div>";
 
 $htm[]="<div class='col-md-3'>";
