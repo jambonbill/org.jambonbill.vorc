@@ -22,7 +22,7 @@ class Vorc
     }
 
 
-    public function users()
+    public function wikiUsers()
     {
         $sql="SELECT DISTINCT user_created FROM wiki_en WHERE 1 ORDER BY user_created;";
         $q=$this->db()->query($sql) or die("Error: $sql");
@@ -34,6 +34,17 @@ class Vorc
         return $dat;
     }
 
+    public function newsUsers()
+    {
+        $sql="SELECT DISTINCT user_created FROM news_en WHERE 1 ORDER BY user_created;";
+        $q=$this->db()->query($sql) or die("Error: $sql");
+        $dat=[];
+        while($r=$q->fetch()){
+            @$dat[$r['user_created']]=$r['user_created'];
+        }
+        //sort($dat);
+        return $dat;
+    }
 
     public function categories()
     {
