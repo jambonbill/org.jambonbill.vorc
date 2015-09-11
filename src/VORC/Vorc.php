@@ -22,6 +22,10 @@ class Vorc
     }
 
 
+    // WIKI //
+    // WIKI //
+    // WIKI //
+
     public function wikiUsers()
     {
         $sql="SELECT DISTINCT user_created FROM wiki_en WHERE 1 ORDER BY user_created;";
@@ -34,17 +38,7 @@ class Vorc
         return $dat;
     }
 
-    public function newsUsers()
-    {
-        $sql="SELECT DISTINCT user_created FROM news_en WHERE 1 ORDER BY user_created;";
-        $q=$this->db()->query($sql) or die("Error: $sql");
-        $dat=[];
-        while($r=$q->fetch()){
-            @$dat[$r['user_created']]=$r['user_created'];
-        }
-        //sort($dat);
-        return $dat;
-    }
+
 
     public function categories()
     {
@@ -93,6 +87,47 @@ class Vorc
         $q=$this->db()->query($sql) or die("Error: $sql");
         $r=$q->fetch(\PDO::FETCH_ASSOC);
         return $r['COUNT(*)'];
+    }
+
+
+    public function wiki_en_delete($id=0)
+    {
+        $sql="DELETE FROM wiki_jp WHERE xxx;";
+        $q=$this->db()->query($sql) or die("Error: $sql");
+    }
+    
+    public function wiki_jp_delete($id=0)
+    {
+        $sql="DELETE FROM wiki_jp WHERE xxx;";
+        $q=$this->db()->query($sql) or die("Error: $sql");
+    }
+
+    // NEWS //
+    // NEWS //
+    // NEWS //
+    public function newsUsers()
+    {
+        $sql="SELECT DISTINCT user_created FROM news_en WHERE 1 ORDER BY user_created;";
+        $q=$this->db()->query($sql) or die("Error: $sql");
+        $dat=[];
+        while($r=$q->fetch()){
+            @$dat[$r['user_created']]=$r['user_created'];
+        }
+        //sort($dat);
+        return $dat;
+    }
+
+
+    public function news_en_delete($id=0)
+    {
+        $sql="DELETE FROM wiki_jp WHERE xxx;";
+        $q=$this->db()->query($sql) or die("Error: $sql");
+    }
+    
+    public function news_jp_delete($id=0)
+    {
+        $sql="DELETE FROM wiki_jp WHERE xxx;";
+        $q=$this->db()->query($sql) or die("Error: $sql");
     }
 
 }
