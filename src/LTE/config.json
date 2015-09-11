@@ -28,13 +28,13 @@
 	   		"class":"header"
 	   	},
 	   	
-	   	"news1":{
-			"text":"News",
+	   	"newsEn":{
+			"text":"News EN",
 			"url":"news_en/index.php"
 	   	},
 
-	   	"wiki":{
-			"text":"Wiki",
+	   	"wikiEn":{
+			"text":"Wiki EN",
 			"url":"wiki_en/index.php"
 	   	},
 
@@ -45,9 +45,13 @@
 	   		"class":"header"
 	   	},
 
-		
-		"wiki2":{
-			"text":"Wiki",
+		"newsJp":{
+			"text":"News JP",
+			"url":"news_jp/index.php"
+	   	},
+
+		"wikiJp":{
+			"text":"Wiki JP",
 			"url":"wiki_jp/index.php"
 	   	},
 
