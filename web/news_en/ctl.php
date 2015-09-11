@@ -15,6 +15,7 @@ switch ($_POST['do']) {
 		
 		$WHERE=[];
 		$WHERE[]='1=1';
+		$WHERE[]='newsbody<>""';
 		if($_POST['search']){
 			$WHERE[]='(title LIKE '.$VORC->db()->quote($_POST['search']).' OR newsbody LIKE '.$VORC->db()->quote($_POST['search']).')';
 		}
@@ -35,7 +36,7 @@ switch ($_POST['do']) {
 		$htm[]= "<thead>";
 		//$htm[]= "<th>Date</th>";
 		$htm[]= "<th>Title</th>";
-		$htm[]= "<th>User</th>";
+		$htm[]= "<th>By</th>";
 		$htm[]= "<th>Updated</th>";
 		$htm[]= "</thead>";
 		$htm[]= "<tbody>";

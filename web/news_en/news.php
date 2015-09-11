@@ -52,6 +52,22 @@ $htm[]='<input type="text" class="form-control" id="url" placeholder="URL" value
 $htm[]='</div></div>';
 
 
+// Thanks //
+$htm[]='<div class="form-group">';
+$htm[]='<label class="col-sm-2 control-label">Thanks</label>';
+$htm[]='<div class="col-sm-10">';
+$htm[]='<input type="text" class="form-control" id="thanks" placeholder="Thanks" value="'.$r['thanks'].'" readonly>';
+$htm[]='</div></div>';
+
+
+// Memo //
+$htm[]='<div class="form-group">';
+$htm[]='<label class="col-sm-2 control-label">Memo</label>';
+$htm[]='<div class="col-sm-10">';
+$htm[]='<input type="text" class="form-control" id="memo" placeholder="Memo" value="'.$r['memo'].'" readonly>';
+$htm[]='</div></div>';
+
+
 // Last update //
 $date=date("Y-m-d H:i:s",strtotime($r['lastupdate']));
 $htm[]='<div class="form-group">';
@@ -84,7 +100,8 @@ echo $box;
 <script>
 $(function(){
 	$('#delete').click(function(){
-		alert('todo');
+		if(!confirm("Delete this news ?"))return false;
+		alert("No");
 	});
 });
 </script>

@@ -28,7 +28,7 @@ include "box_search.php";
 
 $box=new LTE\Box;
 $box->id("boxResult");
-$box->title("Result");
+$box->title("News result");
 $box->icon("fa fa-list");
 $box->body("...");
 echo $box;
