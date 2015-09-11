@@ -26,6 +26,18 @@ class Vorc
     // WIKI //
     // WIKI //
 
+    public function wikiJpUsers()
+    {
+        $sql="SELECT DISTINCT user_created FROM wiki_jp WHERE 1 ORDER BY user_created;";
+        $q=$this->db()->query($sql) or die("Error: $sql");
+        $dat=[];
+        while($r=$q->fetch()){
+            @$dat[$r['user_created']]=$r['user_created'];
+        }
+        //sort($dat);
+        return $dat;
+    }
+
     public function wikiUsers()
     {
         $sql="SELECT DISTINCT user_created FROM wiki_en WHERE 1 ORDER BY user_created;";

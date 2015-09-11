@@ -18,7 +18,11 @@ switch ($_POST['do']) {
 		if($_POST['search'])$WHERE[]='name_wikipage LIKE "%'.$_POST['search'].'%" ';
 		if($_POST['category'])$WHERE[]='flag_category LIKE "%;'.$_POST['category'].';%" ';
 		if($_POST['platform'])$WHERE[]='flag_platform LIKE "%;'.$_POST['platform'].';%" ';
-		if($_POST['user'])$WHERE[]='user_modified LIKE "'.$_POST['user'].'" ';
+		
+		if($_POST['user']){
+			$WHERE[]='(user_created LIKE "'.$_POST['user'].'" OR user_modified LIKE "'.$_POST['user'].'" )';
+		}
+		
 		$WHERE=implode(' AND ',$WHERE);
 		
 		// FIND //
