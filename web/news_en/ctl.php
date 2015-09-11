@@ -26,7 +26,7 @@ switch ($_POST['do']) {
 		$WHERE=implode(' AND ',$WHERE);
 		
 		// FIND //
-		$sql ="SELECT * FROM news_en WHERE $WHERE ORDER BY user_modified DESC LIMIT 1000;";
+		$sql ="SELECT * FROM news_en WHERE $WHERE ORDER BY user_modified DESC;";
 		//echo "<pre>$sql</pre>";
 
 		$q=$VORC->db()->query($sql) or die("Error:".print_r($VORC->db()->errorInfo(), true)."<hr />$sql");
