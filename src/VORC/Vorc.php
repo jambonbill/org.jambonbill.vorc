@@ -136,6 +136,30 @@ class Vorc
     {
         //echo __FUNCTION__."()";
         
+
+        // Process Lines //
+        $rows=explode("\n",$str);
+        foreach($rows as $k=>$row){
+            
+            preg_match("/^##(.*)$/",$row,$o);
+            if (isset($o[1])) {
+                $rows[$k]="<h2>".$o[1]."</h2>";
+            }
+
+            preg_match("/^#(.*)$/",$row,$o);
+            if (isset($o[1])) {
+                $rows[$k]="<h1>".$o[1]."</h1>";
+            }
+            
+            preg_match("/^-(.*)$/",$row,$o);
+            if (isset($o[1])) {
+                $rows[$k]="<li>".$o[1]."</li>";
+            }
+        }
+
+        $str=implode("\n",$rows);// reblob //
+
+
         // Link to a wiki page
         preg_match_all("/\[\[([a-z 0-9_-]+)\]\]/i",$str,$o);
         if (count($o[1])) {
@@ -158,8 +182,10 @@ class Vorc
                 $str=str_replace($o[0],"<a href='".$o[1][$k]."'>".$o[1][$k]."</a>",$str);
             }
         }
-        // Comments
-        $html=$str;
+
+        // NL 2 BR
+        $html=nl2br($str);
+
         return $html;
     }
 
@@ -173,6 +199,31 @@ class Vorc
     {
         //echo __FUNCTION__."()";
         
+
+         // Process Lines //
+        $rows=explode("\n",$str);
+        foreach ($rows as $k=>$row) {
+
+            preg_match("/^##(.*)$/",$row,$o);
+            if (isset($o[1])) {
+                $rows[$k]="<h2>".$o[1]."</h2>";
+            }
+
+            preg_match("/^#(.*)$/",$row,$o);
+            if (isset($o[1])) {
+                $rows[$k]="<h1>".$o[1]."</h1>";
+            }
+
+            preg_match("/^-(.*)$/",$row,$o);
+            if (isset($o[1])) {
+                $rows[$k]="<li>".$o[1]."</li>";
+            }
+        }
+
+        $str=implode("\n",$rows);// reblob //
+
+
+
         // Link to a wiki page
         preg_match_all("/\[\[([a-z 0-9_-]+)\]\]/i",$str,$o);
         if (count($o[1])) {
@@ -195,8 +246,10 @@ class Vorc
                 $str=str_replace($o[0],"<a href='".$o[1][$k]."'>".$o[1][$k]."</a>",$str);
             }
         }
-        // Comments
-        $html=$str;
+                
+        // NL 2 BR
+        $html=nl2br($str);
+
         return $html;
     }
 
