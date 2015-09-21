@@ -85,6 +85,129 @@ class Vorc
         return $dat;
     }
 
+    /**
+     * Find a Wiki id, for a given pagename.
+     * Usually marked as [[pagename]] in the wiki
+     * @param  string $pagename [description]
+     * @return [type]           [description]
+     */
+    public function wikiEnPageId($pagename='')
+    {
+        
+        //echo __FUNCTION__."($pagename);<br />";
+        
+        $sql="SELECT id FROM wiki_en WHERE name_wikipage LIKE '".$pagename."' LIMIT 1;";
+        $q=$this->db()->query($sql) or die("Error: $sql");
+        if($r=$q->fetch()){
+            return $r['id'];
+        }
+        return false;
+    }
+
+
+    /**
+     * Find a Wiki id, for a given pagename.
+     * Usually marked as [[pagename]] in the wiki
+     * @param  string $pagename [description]
+     * @return [type]           [description]
+     */
+    public function wikiJpPageId($pagename='')
+    {
+        
+        //echo __FUNCTION__."($pagename);<br />";
+        
+        $sql="SELECT id FROM wiki_jp WHERE name_wikipage LIKE '".$pagename."' LIMIT 1;";
+        $q=$this->db()->query($sql) or die("Error: $sql");
+        if($r=$q->fetch()){
+            return $r['id'];
+        }
+        return false;
+    }
+
+
+
+    /**
+     * Process wiki page text
+     * https://sites.google.com/site/viceexp/
+     * @param  [type] $str [description]
+     * @return [type]      [description]
+     */
+    public function process_en($str)
+    {
+        //echo __FUNCTION__."()";
+        
+        // Link to a wiki page
+        preg_match_all("/\[\[([a-z 0-9_-]+)\]\]/i",$str,$o);
+        if (count($o[1])) {
+            //echo "<pre>WIKI";print_r($o);echo "</pre>";    
+            foreach($o[1] as $k=>$pagename){
+                $id=$this->wikiEnPageId($pagename);
+                if ($id) {
+                    $str=str_replace($o[0][$k],"<a href='../wiki_en/page.php?id=$id'>".$o[0][$k]."</a>",$str);
+                }else{
+                    $str=str_replace($o[0][$k],"<b title='Not found' style='color:#c00'>".$o[0][$k]."</b>",$str);    
+                }
+            }
+        }
+        
+        // Link to a URL
+        preg_match_all("/{{([a-z\. 0-9\/:-]+)}}/i",$str,$o);
+        if (count($o[1])) {
+            //echo "<pre>URLS";print_r($o[1]);echo "</pre>";    
+            foreach($o[1] as $k=>$strurl){
+                $str=str_replace($o[0],"<a href='".$o[1][$k]."'>".$o[1][$k]."</a>",$str);
+            }
+        }
+        // Comments
+        $html=$str;
+        return $html;
+    }
+
+    /**
+     * Process wiki page text
+     * https://sites.google.com/site/viceexp/
+     * @param  [type] $str [description]
+     * @return [type]      [description]
+     */
+    public function process_jp($str)
+    {
+        //echo __FUNCTION__."()";
+        
+        // Link to a wiki page
+        preg_match_all("/\[\[([a-z 0-9_-]+)\]\]/i",$str,$o);
+        if (count($o[1])) {
+            //echo "<pre>WIKI";print_r($o);echo "</pre>";    
+            foreach($o[1] as $k=>$pagename){
+                $id=$this->wikiJpPageId($pagename);
+                if ($id) {
+                    $str=str_replace($o[0][$k],"<a href='../wiki_jp/page.php?id=$id'>".$o[0][$k]."</a>",$str);
+                }else{
+                    $str=str_replace($o[0][$k],"<b title='Not found' style='color:#c00'>".$o[0][$k]."</b>",$str);    
+                }
+            }
+        }
+        
+        // Link to a URL
+        preg_match_all("/{{([a-z\. 0-9\/:-]+)}}/i",$str,$o);
+        if (count($o[1])) {
+            //echo "<pre>URLS";print_r($o[1]);echo "</pre>";    
+            foreach($o[1] as $k=>$strurl){
+                $str=str_replace($o[0],"<a href='".$o[1][$k]."'>".$o[1][$k]."</a>",$str);
+            }
+        }
+        // Comments
+        $html=$str;
+        return $html;
+    }
+
+
+
+    public function wikiflag_en($str){
+        $sql="SELECT COUNT(*) FROM wiki_en WHERE 1;";
+        return $id;
+    }
+
+
     public function wikiEnCount()
     {
         $sql="SELECT COUNT(*) FROM wiki_en WHERE 1;";
@@ -113,6 +236,10 @@ class Vorc
         $sql="DELETE FROM wiki_jp WHERE xxx;";
         $q=$this->db()->query($sql) or die("Error: $sql");
     }
+
+
+
+
 
     // NEWS //
     // NEWS //

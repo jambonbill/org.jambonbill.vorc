@@ -17,17 +17,13 @@ $q=$VORC->db()->query($sql) or die("Error: $sql");
 $r=$q->fetch(PDO::FETCH_ASSOC);
 
 if(!$r)die("Error : Wiki page not found");
-
-
 ?>
 <section class="content-header">
   <h1><i class='fa fa-font'></i> <?php echo $r['name_wikipage']?></h1>
 </section>
 
-
 <section class="content">
 <?php
-
 /*
 id	varchar(14)
 name_wikipage	text	
@@ -44,8 +40,10 @@ flag_system	tinyint(1)
 ex_url
 */
 
+
 $htm=[];
-$htm[]="<textarea class='form-control' rows=10>".$r['contents']."</textarea>";
+//$htm[]="<textarea class='form-control' rows=10>".$r['contents']."</textarea>";
+$htm[]=$VORC->process_en($r['contents']);
 
 // category
 //$htm[]="<div class=row><div class='col-md-12'><input type=text class='form-control' placeholder='Category' ></div></div>";

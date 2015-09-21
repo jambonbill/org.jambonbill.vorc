@@ -44,7 +44,7 @@ ex_url
 */
 
 $htm=[];
-$htm[]="<textarea class='form-control' rows=10>".$r['contents']."</textarea>";
+$htm[]=$VORC->process_jp($r['contents']);
 
 // category
 //$htm[]="<div class=row><div class='col-md-12'><input type=text class='form-control' placeholder='Category' ></div></div>";

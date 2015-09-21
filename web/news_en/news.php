@@ -29,7 +29,7 @@ if(!$r){
 <?php
 
 $htm=[];
-$htm[]=$r['newsbody'];
+$htm[]=$VORC->process_en($r['newsbody']);
 //$htm[]="<i class='text-muted'>".$r['newsbody']."</i>";
 
 $htm[]='<div class="form-horizontal">';

@@ -34,7 +34,7 @@ switch ($_POST['do']) {
 		$htm=[];
 		$htm[]= "<table class='table table-condensed table-hover'>";
 		$htm[]= "<thead>";
-		$htm[]= "<th>Name</th>";
+		$htm[]= "<th>Page name</th>";
 		$htm[]= "<th>Categ</th>";
 		$htm[]= "<th>User</th>";
 		$htm[]= "<th>Updated</th>";
