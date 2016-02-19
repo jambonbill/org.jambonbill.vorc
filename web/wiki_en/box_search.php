@@ -44,27 +44,4 @@ $box->body($htm);
 echo $box;
 ?>
 <div id='more'></div>
-<script>
-$(function(){
-	$('#search,#category,#platform,#user,#date').change(function(){
-		console.log('change');
-		searchWiki();
-	});
-
-	var searchWiki=function(){
-
-		var p={
-			'do':'search',
-			'search':$('#search').val(),
-			'category':$('#category').val(),
-			'platform':$('#platform').val(),
-			'user':$('#user').val(),
-			'date':$('#date').val()
-		}
-		$('#boxResult .box-body').load('ctl.php',p,function(){
-
-		});
-	}
-	searchWiki();
-});
-</script>
+<script src='js/wiki_en.js'></script>

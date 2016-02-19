@@ -42,7 +42,9 @@ ex_url
 
 
 $htm=[];
+
 //$htm[]="<textarea class='form-control' rows=10>".$r['contents']."</textarea>";
+
 $htm[]=$VORC->process_en($r['contents']);
 
 // category
