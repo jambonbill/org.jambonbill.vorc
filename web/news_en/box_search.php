@@ -5,12 +5,22 @@ $htm=[];
 
 $htm[]="<div class='row'>";
 
-$htm[]="<div class='col-md-3'>";
+$htm[]="<div class='col-md-2'>";
 $htm[]="<input type='text' class='form-control' placeholder='Search news' id='search'>";
 $htm[]="</div>";
 
-$htm[]="<div class='col-md-3'>";
+$htm[]="<div class='col-md-2'>";
 $htm[]="<input type='text' class='form-control' placeholder='Flag wiki' id='flag_wiki'>";
+$htm[]="</div>";
+
+
+$htm[]="<div class='col-md-2'>";
+$htm[]="<input type='text' class='form-control' placeholder='Search memo' id='memo'>";
+$htm[]="</div>";
+
+
+$htm[]="<div class='col-md-2'>";
+$htm[]="<input type='text' class='form-control' placeholder='Search url' id='url'>";
 $htm[]="</div>";
 
 /*
@@ -25,7 +35,7 @@ $htm[]="<select class='form-control' id=user><option value=''>By</option>";
 foreach($VORC->newsUsers() as $val)$htm[]="<option value='$val'>".ucfirst($val)."</option>";
 $htm[]="</select></div>";
 
-$htm[]="<div class='col-md-3'>";
+$htm[]="<div class='col-md-2'>";
 $htm[]="<input type='date' id=date class='form-control'>";
 $htm[]="</div>";
 
