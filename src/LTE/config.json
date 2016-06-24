@@ -24,6 +24,13 @@
 	},
 	"menu":{
 		
+
+		"tunes":{
+	   		"icon":"fa fa-music",
+			"text":"Tunes",
+			"url":"tunes/index.php"
+	   	},
+
 		"english":{
 	   		"icon":"fa fa-globe",
 	   		"text":"English",
