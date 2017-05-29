@@ -32,15 +32,15 @@ if (is_file($cf)) {
     exit("<script>document.location.href='index.php';</script>");
 }
 
-$pdo= new LAWS\Pdo();
-$UD=new LAWS\UserDjango($pdo->db());
+$pdo= new VORC\Pdo();
+$UD=new VORC\UserDjango($pdo->db());
 
 if (isset($_POST['email']) && isset($_POST['password'])) {
 
     if ($UD->login($_POST['email'], $_POST['password'])) {
-        
+
         $msg=new LTE\Callout("info", "Please wait", "You are being redirected...");
-        
+
         $box=new LTE\Box;
         $box->type("success");
         $box->title("<i class='fa fa-home'></i> Welcome !");
@@ -49,18 +49,18 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
         echo $box->html();
 
         echo "<script>document.location.href='../home/index.php';</script>";
-    
+
     } else {
 
         // nope
-                
+
         $msg ="<p>Please try again</p>";
 
-        
-        
+
+
         $foot=[];
         $foot[]="<a href='index.php' class='btn btn-default'><i class='fa fa-sign-in'></i> Try again</a>";
-        
+
         $box=new LTE\Box;
         $box->type("danger");
         $box->title("Invalid login or password");
@@ -68,7 +68,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
         $box->body('<script>document.location.href="index.php";</script>');
         $box->footer($foot);
         echo $box->html();
-        
+
         //echo $admin->box("danger", "<i class='fa fa-sign-in'></i> Login <small>profile</small>", $callout, $foot);
     }
 } else {

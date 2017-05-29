@@ -19,9 +19,9 @@ echo $admin;
 <section class="content">
 
 <?php
-$pdo= new LAWS\Pdo();
+$pdo= new VORC\Pdo();
 $db = $pdo->getDatabase();
-$UD=new LAWS\UserDjango($db);
+$UD=new VORC\UserDjango($db);
 
 if ($UD->logout()) {
     $msg=new LTE\Callout("danger", "done", "Bye! <a href='index.php'>Login</a>");

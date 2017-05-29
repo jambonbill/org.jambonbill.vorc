@@ -1,15 +1,15 @@
 $(function(){
-	 
+
     /*
     if (window.location.host!="127.0.0.1"&&window.location.protocol != "https:") {
         window.location.protocol = "https:";//force https
     }
     */
-   
-	
+
+
     $("#boxlogin .overlay").hide();
-          
-   
+
+
     getProfile();//load
 
     console.log("ready");
@@ -30,17 +30,17 @@ function getProfile()
     }
 
     $("#email, #password").prop('disabled', false);
-    
+
     $.post("ctrl.php",{'do':'testProfile','conf':$('#configs').val()},function(json){
-        
+
         if(json.user&&json.user.is_active&&json.user.is_staff){
             console.info("Hello "+json.user.first_name);
             document.location.href='../home';
         }else{
             console.log(json);
         }
-       
-    }).error(function(e){
+
+    }).fail(function(e){
         console.error(e.responseText);
     });
 }

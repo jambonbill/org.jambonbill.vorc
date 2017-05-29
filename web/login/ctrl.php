@@ -17,7 +17,7 @@ switch ($_POST['do']) {
         print_r($_POST);
         break;
 
-    case "logout": 
+    case "logout":
         print_r($_POST);
         $admin->logout();
         break;
@@ -41,8 +41,8 @@ switch ($_POST['do']) {
 
             //since we went this far...
             try{
-                $LAWS = new LAWS\Laws;
-                $dat['user']=$LAWS->user();    
+                $VORC = new VORC\Vorc;
+                $dat['user']=$VORC->user();
             }
             catch(Exception $e){
 
