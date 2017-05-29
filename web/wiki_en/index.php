@@ -13,7 +13,7 @@ $VORC=new VORC\Vorc();
 
 ?>
 <section class="content-header">
-  <h1><i class='fa fa-wikipedia-w'></i> WIKI - EN 
+  <h1><i class='fa fa-wikipedia-w'></i> WIKI - EN
   <small><?php echo $VORC->wikiEnCount();?> pages in VORC wiki EN</small>
   </h1>
 </section>
@@ -35,6 +35,7 @@ $box->icon("fa fa-list");
 $box->body("...");
 echo $box;
 
-
+/*
 $admin->footer("Vorc backup");
 $admin->end();
+*/
