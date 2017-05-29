@@ -1,19 +1,21 @@
 {
-	"title":"VORC READONLY",
+	"title":"VORC",
 	"homeurl":"index.php",
 	"favicon":"img/favicon.png",
 	"menusearch":false,
 	"css":[
-		"bootstrap/css/bootstrap.min.css",
+		"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css",
     	"dist/css/font-awesome/4.3.0/font-awesome.min.css",
 	    "dist/css/ionicons/2.0.0/ionicons.min.css",
-    	"dist/css/AdminLTE.min.css",
+    	"dist/css/AdminLTE.css",
     	"dist/css/skins/_all-skins.min.css"
 	],
 	"js":[
 	    "plugins/jQuery/jquery-3.1.1.min.js",
+	    "https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js",
 	    "plugins/jQuery/jquery.cookie.js",
-    	"bootstrap/js/bootstrap.min.js",
+	    "plugins/jquery-tablesorter.min.js",
+    	"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js",
     	"dist/js/app.min.js"
 	],
 	"layout":{
@@ -24,3 +26,7 @@
 	},
 	"menu":"menu.json"
 }
+
+
+
+
