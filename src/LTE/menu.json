@@ -1,47 +1,46 @@
 {
 
 
-	"tunes":{
-   		"icon":"fa fa-music",
-		"text":"Tunes",
-		"url":"tunes/index.php"
+	"archive":{
+   		"icon":"fa fa-archive",
+   		"text":"Archive",
+   		"class":"header",
+         "sub":{
+            "tunes":{
+               "icon":"fa fa-music",
+               "text":"Tunes",
+               "url":"tunes/index.php"
+            },
+            "newsEn":{
+               "icon":"fa fa-newspaper-o",
+               "text":"News EN",
+               "url":"news_en/index.php"
+            },
+
+            "wikiEn":{
+               "icon":"fa fa-wikipedia-w",
+               "text":"Wiki EN",
+               "url":"wiki_en/index.php"
+            },
+
+            "newsJp":{
+               "icon":"fa fa-newspaper-o",
+               "text":"News JP",
+               "url":"news_jp/index.php"
+            },
+
+            "wikiJp":{
+               "icon":"fa fa-wikipedia-w",
+               "text":"Wiki JP",
+               "url":"wiki_jp/index.php"
+            }
+
+         }
    	},
 
-	"english":{
-   		"icon":"fa fa-globe",
-   		"text":"English",
-   		"class":"header"
-   	},
 
-   	"newsEn":{
-   		"icon":"fa fa-newspaper-o",
-		"text":"News EN",
-		"url":"news_en/index.php"
-   	},
 
-   	"wikiEn":{
-   		"icon":"fa fa-wikipedia-w",
-		"text":"Wiki EN",
-		"url":"wiki_en/index.php"
-   	},
 
-   	"japanese":{
-   		"icon":"fa fa-globe",
-   		"text":"Japanese",
-   		"class":"header"
-   	},
-
-	"newsJp":{
-		"icon":"fa fa-newspaper-o",
-		"text":"News JP",
-		"url":"news_jp/index.php"
-   	},
-
-	"wikiJp":{
-		"icon":"fa fa-wikipedia-w",
-		"text":"Wiki JP",
-		"url":"wiki_jp/index.php"
-   	},
 
 
    "newsep":{
@@ -54,6 +53,12 @@
       "icon":"fa fa-list",
       "text":"Wiki (new)",
       "url":"wiki"
+      },
+
+   "wikiSearch":{
+      "icon":"fa fa-search",
+      "text":"Wiki Search",
+      "url":"wiki_search"
       },
 
    "wikiCateg":{
