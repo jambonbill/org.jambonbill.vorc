@@ -11,7 +11,7 @@
     	"dist/css/skins/_all-skins.min.css"
 	],
 	"js":[
-	    "plugins/jQuery/jQuery-2.1.3.min.js",
+	    "plugins/jQuery/jquery-3.1.1.min.js",
 	    "plugins/jQuery/jquery.cookie.js",
     	"bootstrap/js/bootstrap.min.js",
     	"dist/js/app.min.js"
@@ -22,61 +22,5 @@
 		"layout-boxed":false,
 		"sidebar-collapse":false
 	},
-	"menu":{
-		
-
-		"tunes":{
-	   		"icon":"fa fa-music",
-			"text":"Tunes",
-			"url":"tunes/index.php"
-	   	},
-
-		"english":{
-	   		"icon":"fa fa-globe",
-	   		"text":"English",
-	   		"class":"header"
-	   	},
-	   	
-	   	"newsEn":{
-	   		"icon":"fa fa-newspaper-o",
-			"text":"News EN",
-			"url":"news_en/index.php"
-	   	},
-
-	   	"wikiEn":{
-	   		"icon":"fa fa-wikipedia-w",
-			"text":"Wiki EN",
-			"url":"wiki_en/index.php"
-	   	},
-
-	   	"japanese":{
-	   		"icon":"fa fa-globe",
-	   		"text":"Japanese",
-	   		"class":"header"
-	   	},
-
-		"newsJp":{
-			"icon":"fa fa-newspaper-o",
-			"text":"News JP",
-			"url":"news_jp/index.php"
-	   	},
-
-		"wikiJp":{
-			"icon":"fa fa-wikipedia-w",
-			"text":"Wiki JP",
-			"url":"wiki_jp/index.php"
-	   	},
-
-
-	   "separator":{
-	   		"text":"",
-	   		"class":"header"
-	   },
-	   "logout":{	      
-	      "text":"Logout",
-	      "id":"btn_logout",
-	      "icon":"fa fa-sign-out",
-	      "url":"login/logout.php"
-	   }
-	}
+	"menu":"menu.json"
 }
