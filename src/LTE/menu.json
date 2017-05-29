@@ -1,0 +1,83 @@
+{
+
+
+	"tunes":{
+   		"icon":"fa fa-music",
+		"text":"Tunes",
+		"url":"tunes/index.php"
+   	},
+
+	"english":{
+   		"icon":"fa fa-globe",
+   		"text":"English",
+   		"class":"header"
+   	},
+
+   	"newsEn":{
+   		"icon":"fa fa-newspaper-o",
+		"text":"News EN",
+		"url":"news_en/index.php"
+   	},
+
+   	"wikiEn":{
+   		"icon":"fa fa-wikipedia-w",
+		"text":"Wiki EN",
+		"url":"wiki_en/index.php"
+   	},
+
+   	"japanese":{
+   		"icon":"fa fa-globe",
+   		"text":"Japanese",
+   		"class":"header"
+   	},
+
+	"newsJp":{
+		"icon":"fa fa-newspaper-o",
+		"text":"News JP",
+		"url":"news_jp/index.php"
+   	},
+
+	"wikiJp":{
+		"icon":"fa fa-wikipedia-w",
+		"text":"Wiki JP",
+		"url":"wiki_jp/index.php"
+   	},
+
+
+   "newsep":{
+         "icon":"fa fa-globe",
+         "text":"New WIKI",
+         "class":"header"
+      },
+
+   "wikinew":{
+      "icon":"fa fa-list",
+      "text":"Wiki (new)",
+      "url":"wiki"
+      },
+
+   "wikiCateg":{
+      "icon":"fa fa-list",
+      "text":"Wiki Categories",
+      "url":"wiki_categories"
+      },
+
+   "wikiPlatform":{
+      "icon":"fa fa-list",
+      "text":"Wiki Platforms",
+      "url":"wiki_platforms"
+      },
+
+   "separator":{
+   		"text":"",
+   		"class":"header"
+   },
+
+
+   "logout":{
+      "text":"Logout",
+      "id":"btn_logout",
+      "icon":"fa fa-sign-out",
+      "url":"login/logout.php"
+   }
+}
