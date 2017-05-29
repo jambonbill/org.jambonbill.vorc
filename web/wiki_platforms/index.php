@@ -23,7 +23,7 @@ $VORC=new VORC\Vorc();
 
 
 
-$sql="SELECT * FROM wiki_platform WHERE 1";
+$sql="SELECT * FROM vorc.wiki_platform WHERE 1";
 $q=$VORC->db()->query($sql) or die("Error:".print_r($VORC->db()->errorInfo(), true)."<hr />$sql");
 
 $htm=[];

@@ -16,7 +16,7 @@ $CATEGS=$VORC->categories();
 echo "<pre>";print_r($CATEGS);
 
 foreach($CATEGS as $categ=>$num){
-	$sql="INSERT INTO wiki_category (wc_name, wc_updated) VALUES ('$categ', NOW());";
+	$sql="INSERT INTO vorc.wiki_category (wc_name, wc_updated) VALUES ('$categ', NOW());";
 	$VORC->db()->query($sql) or die("Error:".print_r($VORC->db()->errorInfo(), true)."<hr />$sql");
 	echo "<li>$sql";
 }
