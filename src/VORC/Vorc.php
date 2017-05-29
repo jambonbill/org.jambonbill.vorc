@@ -4,13 +4,37 @@ namespace VORC;
 
 class Vorc
 {
-	private $db;
-	public function __construct ()
+    private $start;
+    private $config;
+    private $db;
+	private $UD;
+
+    public function __construct ()
     {
+        // start/stop watch
+        $this->start=microtime(true);
+
+        $filename=__DIR__."/../../profiles/".$_SERVER['HTTP_HOST'].".json";
+
+        if (is_file($filename)) {
+            // Load configuration
+            $this->config = json_decode(file_get_contents($filename));
+        }else{
+            throw new \RuntimeException(__FUNCTION__.' error: no config file like '.$filename);
+        }
+
         // Create PDO object
-        $pdo=new \PDO\Pdo;
+        $pdo=new Pdo;
         $this->db=$pdo->db();
+
+
+        //User
+        $this->UD=new UserDjango($this->db);
+        $session = $this->UD->djangoSession();//
+        //echo "<pre>session:";print_r($session);
+        $this->user = $this->UD->user($session['session_data']);
     }
+
 
     /**
      * [db description]
@@ -19,6 +43,66 @@ class Vorc
     public function db()
     {
         return $this->db;
+    }
+
+    /**
+     * End user session
+     * @return [type] [description]
+     */
+    public function logout()
+    {
+        $this->UD->logout();
+        return true;
+    }
+
+
+    /**
+     * Return current user id !
+     * @return [type] [description]
+     */
+    public function user()
+    {
+        //print_r($this->user);
+        return $this->user;
+    }
+
+
+    /**
+     * Return true if user is staff
+     * @return boolean [description]
+     */
+    public function is_staff(){
+        return $this->user['is_staff'];
+    }
+
+
+
+
+    /**
+     * Return auth_user record for a given user_id
+     * @return [type] [description]
+     */
+    public function auth_user($user_id=0)
+    {
+        $user_id*=1;
+        if(!$user_id)return false;
+
+        $sql="SELECT * FROM `jambonbill.org`.auth_user WHERE id=$user_id LIMIT 1;";
+        $q = $this->db->query($sql) or die(print_r($this->db()->errorInfo(), true) . "<hr />$sql");
+        $r=$q->fetch(\PDO::FETCH_ASSOC);
+        return $r;
+    }
+
+
+
+
+    /**
+     * Return current user id !
+     * @return [type] [description]
+     */
+    public function user_id()
+    {
+        return $this->user['id'];
     }
 
 
@@ -54,7 +138,7 @@ class Vorc
 
     public function categories()
     {
-        $sql="SELECT DISTINCT flag_category FROM wiki_en WHERE 1;";
+        $sql="SELECT DISTINCT vorc.flag_category FROM wiki_en WHERE 1;";
         $q=$this->db()->query($sql) or die("Error: $sql");
         $categs=[];
         while($r=$q->fetch()){
@@ -71,7 +155,7 @@ class Vorc
 
     public function platforms()
     {
-        $sql="SELECT DISTINCT flag_platform FROM wiki_en WHERE 1;";
+        $sql="SELECT DISTINCT vorc.flag_platform FROM wiki_en WHERE 1;";
         $q=$this->db()->query($sql) or die("Error: $sql");
         $dat=[];
         while($r=$q->fetch()){
@@ -93,10 +177,10 @@ class Vorc
      */
     public function wikiEnPageId($pagename='')
     {
-        
+
         //echo __FUNCTION__."($pagename);<br />";
-        
-        $sql="SELECT id FROM wiki_en WHERE name_wikipage LIKE '".$pagename."' LIMIT 1;";
+
+        $sql="SELECT id FROM vorc.wiki_en WHERE name_wikipage LIKE '".$pagename."' LIMIT 1;";
         $q=$this->db()->query($sql) or die("Error: $sql");
         if($r=$q->fetch()){
             return $r['id'];
@@ -113,10 +197,10 @@ class Vorc
      */
     public function wikiJpPageId($pagename='')
     {
-        
+
         //echo __FUNCTION__."($pagename);<br />";
-        
-        $sql="SELECT id FROM wiki_jp WHERE name_wikipage LIKE '".$pagename."' LIMIT 1;";
+
+        $sql="SELECT id FROM vorc.wiki_jp WHERE name_wikipage LIKE '".$pagename."' LIMIT 1;";
         $q=$this->db()->query($sql) or die("Error: $sql");
         if($r=$q->fetch()){
             return $r['id'];
@@ -135,12 +219,12 @@ class Vorc
     public function process_en($str)
     {
         //echo __FUNCTION__."()";
-        
+
 
         // Process Lines //
         $rows=explode("\n",$str);
         foreach($rows as $k=>$row){
-            
+
             preg_match("/^##(.*)$/",$row,$o);
             if (isset($o[1])) {
                 $rows[$k]="<h2>".$o[1]."</h2>";
@@ -150,7 +234,7 @@ class Vorc
             if (isset($o[1])) {
                 $rows[$k]="<h1>".$o[1]."</h1>";
             }
-            
+
             preg_match("/^-(.*)$/",$row,$o);
             if (isset($o[1])) {
                 $rows[$k]="<li>".$o[1]."</li>";
@@ -163,21 +247,21 @@ class Vorc
         // Link to a wiki page
         preg_match_all("/\[\[([a-z 0-9_-]+)\]\]/i",$str,$o);
         if (count($o[1])) {
-            //echo "<pre>WIKI";print_r($o);echo "</pre>";    
+            //echo "<pre>WIKI";print_r($o);echo "</pre>";
             foreach($o[1] as $k=>$pagename){
                 $id=$this->wikiEnPageId($pagename);
                 if ($id) {
                     $str=str_replace($o[0][$k],"<a href='../wiki_en/page.php?id=$id'>".$o[0][$k]."</a>",$str);
                 }else{
-                    $str=str_replace($o[0][$k],"<b title='Not found' style='color:#c00'>".$o[0][$k]."</b>",$str);    
+                    $str=str_replace($o[0][$k],"<b title='Not found' style='color:#c00'>".$o[0][$k]."</b>",$str);
                 }
             }
         }
-        
+
         // Link to a URL
         preg_match_all("/{{([a-z\. 0-9\/:-]+)}}/i",$str,$o);
         if (count($o[1])) {
-            //echo "<pre>URLS";print_r($o[1]);echo "</pre>";    
+            //echo "<pre>URLS";print_r($o[1]);echo "</pre>";
             foreach($o[1] as $k=>$strurl){
                 $str=str_replace($o[0],"<a href='".$o[1][$k]."'>".$o[1][$k]."</a>",$str);
             }
@@ -198,7 +282,7 @@ class Vorc
     public function process_jp($str)
     {
         //echo __FUNCTION__."()";
-        
+
 
          // Process Lines //
         $rows=explode("\n",$str);
@@ -227,26 +311,26 @@ class Vorc
         // Link to a wiki page
         preg_match_all("/\[\[([a-z 0-9_-]+)\]\]/i",$str,$o);
         if (count($o[1])) {
-            //echo "<pre>WIKI";print_r($o);echo "</pre>";    
+            //echo "<pre>WIKI";print_r($o);echo "</pre>";
             foreach($o[1] as $k=>$pagename){
                 $id=$this->wikiJpPageId($pagename);
                 if ($id) {
                     $str=str_replace($o[0][$k],"<a href='../wiki_jp/page.php?id=$id'>".$o[0][$k]."</a>",$str);
                 }else{
-                    $str=str_replace($o[0][$k],"<b title='Not found' style='color:#c00'>".$o[0][$k]."</b>",$str);    
+                    $str=str_replace($o[0][$k],"<b title='Not found' style='color:#c00'>".$o[0][$k]."</b>",$str);
                 }
             }
         }
-        
+
         // Link to a URL
         preg_match_all("/{{([a-z\. 0-9\/:-]+)}}/i",$str,$o);
         if (count($o[1])) {
-            //echo "<pre>URLS";print_r($o[1]);echo "</pre>";    
+            //echo "<pre>URLS";print_r($o[1]);echo "</pre>";
             foreach($o[1] as $k=>$strurl){
                 $str=str_replace($o[0],"<a href='".$o[1][$k]."'>".$o[1][$k]."</a>",$str);
             }
         }
-                
+
         // NL 2 BR
         $html=nl2br($str);
 
@@ -256,14 +340,14 @@ class Vorc
 
 
     public function wikiflag_en($str){
-        $sql="SELECT COUNT(*) FROM wiki_en WHERE 1;";
+        $sql="SELECT COUNT(*) FROM vorc.wiki_en WHERE 1;";
         return $id;
     }
 
 
     public function wikiEnCount()
     {
-        $sql="SELECT COUNT(*) FROM wiki_en WHERE 1;";
+        $sql="SELECT COUNT(*) FROM vorc.wiki_en WHERE 1;";
         $q=$this->db()->query($sql) or die("Error: $sql");
         $r=$q->fetch(\PDO::FETCH_ASSOC);
         return $r['COUNT(*)'];
@@ -271,25 +355,25 @@ class Vorc
 
     public function wikiJpCount()
     {
-        $sql="SELECT COUNT(*) FROM wiki_jp WHERE 1;";
+        $sql="SELECT COUNT(*) FROM vorc.wiki_jp WHERE 1;";
         $q=$this->db()->query($sql) or die("Error: $sql");
         $r=$q->fetch(\PDO::FETCH_ASSOC);
         return $r['COUNT(*)'];
     }
 
-
+    /*
     public function wiki_en_delete($id=0)
     {
-        $sql="DELETE FROM wiki_jp WHERE xxx;";
-        $q=$this->db()->query($sql) or die("Error: $sql");
-    }
-    
-    public function wiki_jp_delete($id=0)
-    {
-        $sql="DELETE FROM wiki_jp WHERE xxx;";
+        $sql="DELETE FROM vorc.wiki_jp WHERE xxx;";
         $q=$this->db()->query($sql) or die("Error: $sql");
     }
 
+    public function wiki_jp_delete($id=0)
+    {
+        $sql="DELETE FROM vorc.wiki_jp WHERE xxx;";
+        $q=$this->db()->query($sql) or die("Error: $sql");
+    }
+    */
 
 
 
@@ -309,17 +393,94 @@ class Vorc
         return $dat;
     }
 
-
+    /*
     public function news_en_delete($id=0)
     {
         $sql="DELETE FROM wiki_jp WHERE xxx;";
         $q=$this->db()->query($sql) or die("Error: $sql");
     }
-    
+
     public function news_jp_delete($id=0)
     {
         $sql="DELETE FROM wiki_jp WHERE xxx;";
         $q=$this->db()->query($sql) or die("Error: $sql");
     }
+    */
+
+
+    // NEW WIKI //
+    // NEW WIKI //
+    // NEW WIKI //
+
+    public function wikiUrls($id=0)
+    {
+        $sql="SELECT * FROM vorc.wiki_url WHERE wu_wiki_id=$id;";
+        $q=$this->db()->query($sql) or die("Error: $sql");
+        $dat=[];
+        while($r=$q->fetch(\PDO::FETCH_ASSOC)){
+            $dat[]=$r;
+        }
+        return $dat;
+    }
+
+
+    public function wikiUrlAdd($wiki_id=0,$url='')
+    {
+        $wiki_id*=1;
+        $url=trim($url);
+
+        $sql="INSERT INTO vorc.wiki_url ( wu_wiki_id, wu_url, wu_updated, wu_updater) ";
+        $sql.="VALUES ($wiki_id,".$this->db()->quote($url).",NOW(), ".$this->user_id().");";
+        $q=$this->db()->query($sql) or die("Error: $sql");
+
+        return true;
+    }
+
+    public function wikiUrlDelete($wu_id=0)
+    {
+        $wu_id*=1;
+        if(!$wu_id)return false;
+
+        $sql="UPDATE vorc.wiki_url SET wu_id=-wu_id, wu_updated=NOW() wu_updater=".$this->user_id();
+        $sql.=" WHERE wu_id=$wu_id LIMIT 1;";
+
+        $this->db()->query($sql) or die("Error: $sql");
+        return true;
+    }
+
+
+    public function wiki_categories()
+    {
+        $sql="SELECT wc_id, wc_name FROM vorc.wiki_category WHERE wc_id>0;";
+        $q=$this->db()->query($sql) or die("Error: $sql");
+
+        $dat=[];
+        while($r=$q->fetch(\PDO::FETCH_ASSOC)){
+            $dat[]=$r;
+        }
+        return $dat;
+    }
+
+
+    public function wiki_platforms()
+    {
+        $sql="SELECT wp_id, wp_name FROM vorc.wiki_platform WHERE wp_id>0;";
+        $q=$this->db()->query($sql) or die("Error: $sql");
+
+        $dat=[];
+        while($r=$q->fetch(\PDO::FETCH_ASSOC)){
+            $dat[]=$r;
+        }
+        return $dat;
+    }
+
+    public function random_slug()
+    {
+        $sql="SELECT w_slug FROM vorc.wiki WHERE w_slug IS NOT NULL ORDER BY RAND();";
+        $q=$this->db()->query($sql) or die("Error: $sql");
+        return $r=$q->fetch(\PDO::FETCH_ASSOC);
+    }
 
 }
+
+
