@@ -35,17 +35,26 @@ $(function(){
 		htm+='<th width=150>Updated</th>';
 		htm+='</thead>';
 		htm+='<tbody>';
+		var num=0;
 		for(var i in pages){
-			var page=pages[i];
+			var o=pages[i];
 			//console.log(page);
-			htm+='<tr data-id="'+page.w_id+'">';
-			htm+='<td><i class="text-muted">'+page.w_id;
-			htm+='<td>'+page.w_slug;
-			htm+='<td>'+page.w_name;
-			htm+='<td style="text-align:right">'+page.w_updated;
+			htm+='<tr data-id="'+o.w_id+'">';
+			htm+='<td><i class="text-muted">'+o.w_id;
+			htm+='<td><i class="text-muted">';
+			if(o.w_slug)htm+=o.w_slug;
+			else htm+='-</i>';
+			htm+='<td>'+o.w_name;
+			htm+='<td style="text-align:right">'+o.w_updated;
+			num++;
 		}
 		htm+='</tbody>';
 		htm+='</table>';
+
+		if(num==0){
+			htm+='<pre><i class="fa fa-warning"></i> no data!</pre>';
+		}
+
 		$('#boxResults .box-body').html(htm);
 		$('#boxResults tbody>tr').click(function(e){
 			$('.overlay').show();
