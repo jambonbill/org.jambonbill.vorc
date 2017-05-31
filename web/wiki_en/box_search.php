@@ -42,6 +42,7 @@ $box->icon("fa fa-search");
 $box->boxTools("<a href=# class='btn' title='Clear'>x</a>");
 $box->body($htm);
 echo $box;
+
 ?>
 <div id='more'></div>
 <script src='js/wiki_en.js'></script>

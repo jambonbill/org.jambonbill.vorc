@@ -13,25 +13,36 @@ if($VORC->user_id()<1){
 
 if(isset($_GET['slug'])){
 	$slug=$_GET['slug'];
+	$sql="SELECT * FROM vorc.wiki WHERE (w_slug LIKE ".$VORC->db()->quote($slug)." OR w_name LIKE ".$VORC->db()->quote($slug).");";
+	$q=$VORC->db()->query($sql) or die("Error:$sql");
+	$r=$q->fetch(PDO::FETCH_ASSOC);
+	if(!$r){
+		exit("WIKI slug ($slug) not found");
+	}
+
 }else if(isset($_GET['id'])&&$_GET['id']>0){
 	$ID=$_GET['id']*=1;
 	$sql="SELECT * FROM vorc.wiki WHERE w_id=$ID;";
 	$q=$VORC->db()->query($sql) or die("Error:$sql");
 	$r=$q->fetch(PDO::FETCH_ASSOC);
 }else{
-	$slug=$VORC->random_slug();
-	$sql="SELECT * FROM vorc.wiki WHERE w_slug LIKE ".$VORC->db()->quote($slug);
+	$slug='home';
+	$sql="SELECT * FROM vorc.wiki WHERE 1=1 ORDER BY RAND() LIMIT 1;";
 	$q=$VORC->db()->query($sql) or die("Error:$sql");
 	$r=$q->fetch(PDO::FETCH_ASSOC);
 }
-
-
 
 if ($r) {
 	$ID=$r['w_id'];
 	//print_r($r);
 }else{
 	exit("WIKI Page not found");
+}
+
+if (!$r['w_slug']) {
+	//TODO
+	$slug=str_replace(" ","-",$r['w_name']);
+	$r['w_slug']=strtolower($slug);
 }
 
 $admin = new LTE\AdminLte2();
@@ -65,6 +76,7 @@ New tables:
 //include "box_search.php";
 
 include "box_content.php";
+include "modal_edit.php";
 //include "box_category.php";
 //include "box_platform.php";
 include "box_url.php";
