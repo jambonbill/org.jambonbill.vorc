@@ -273,6 +273,29 @@ class Vorc
         return $html;
     }
 
+
+
+    public function toMarkdown($str='')
+    {
+        //convert [[slug]] to [slug](http://slug)
+
+
+        // Link to a wiki page
+        preg_match_all("/\[\[([a-z 0-9_-]+)\]\]/i",$str,$o);
+        if (count($o[1])) {
+            //echo "<pre>WIKI";print_r($o);echo "</pre>";
+            foreach($o[1] as $k=>$slug){
+                //$id=$this->wikiEnPageId($pagename);
+                $str=str_replace($o[0][$k],"<a href='?slug=$slug'>".$o[0][$k]."</a>",$str);
+            }
+        }
+
+
+        return $str;
+    }
+
+
+
     /**
      * Process wiki page text
      * https://sites.google.com/site/viceexp/
