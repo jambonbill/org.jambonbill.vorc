@@ -10,7 +10,7 @@ $htm.='<th>URL</th>';
 $htm.='</thead>';
 $htm.='<tbody>';
 foreach($URLS as $r){
-	$htm.='<tr data-id='.$r['wu_id'].'>';
+	$htm.='<tr data-id='.$r['wu_id'].' data-url="'.$r['wu_url'].'" title="'.$r['wu_description'].'">';
 	//$htm.='<td><i class="text-muted">'.$r['wu_id'];
 	$htm.='<td>';
 	if($r['wu_description'])$htm.=$r['wu_description'];
