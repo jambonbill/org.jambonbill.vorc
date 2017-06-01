@@ -437,7 +437,7 @@ class Vorc
 
     public function wikiUrls($id=0)
     {
-        $sql="SELECT * FROM vorc.wiki_url WHERE wu_wiki_id=$id;";
+        $sql="SELECT * FROM vorc.wiki_url WHERE wu_id>0 AND wu_wiki_id=$id;";
         $q=$this->db()->query($sql) or die("Error: $sql");
         $dat=[];
         while($r=$q->fetch(\PDO::FETCH_ASSOC)){
