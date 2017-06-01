@@ -25,8 +25,7 @@ if(isset($_GET['slug'])){
 	$sql="SELECT * FROM vorc.wiki WHERE w_id=$ID;";
 	$q=$VORC->db()->query($sql) or die("Error:$sql");
 	$r=$q->fetch(PDO::FETCH_ASSOC);
-}else{
-	$slug='home';
+} else {
 	$sql="SELECT * FROM vorc.wiki WHERE 1=1 ORDER BY RAND() LIMIT 1;";
 	$q=$VORC->db()->query($sql) or die("Error:$sql");
 	$r=$q->fetch(PDO::FETCH_ASSOC);
@@ -36,7 +35,7 @@ if ($r) {
 	$ID=$r['w_id'];
 	//print_r($r);
 }else{
-	exit("WIKI Page not found");
+	exit("WIKI Page not found - <a href=../wiki_search>search</a> ");
 }
 
 if (!$r['w_slug']) {
@@ -77,8 +76,10 @@ New tables:
 
 include "box_content.php";
 include "modal_edit.php";
+
 //include "box_category.php";
 //include "box_platform.php";
 include "box_url.php";
+include "modal_url.php";
 ?>
 <script src="js/wiki.js"></script>

@@ -10,9 +10,18 @@ $HTML=$Parsedown->text($markdown);
 $htm='';
 $htm.='<div class="col-sm-12">'.$HTML.'</div>';
 
-$htm.='<i class="text-muted">Last updated: '.$r['w_updated'].' by '.$r['w_updater'].'</i>';
 
-$htm.='<li><i class="text-muted">Tags: '.$r['flag_platform'].' - '.$r['flag_category'].'</i>';
+
+
+$htm.='<span class="badge badge-default">Category</span> ';
+$htm.='<span class="badge badge-primary">Platform</span> ';
+/*
+$htm.='<span class="badge badge-success">Success</span> ';
+$htm.='<span class="badge badge-info">Info</span> ';
+$htm.='<span class="badge badge-warning">Warning</span> ';
+$htm.='<span class="badge badge-danger">Danger</span> ';
+*/
+//$htm.='<li><i class="text-muted">Tags: '.$r['flag_platform'].' - '.$r['flag_category'].'</i>';
 
 
 
@@ -25,6 +34,9 @@ $box->body($htm);
 $btns='<div class=row>';
 $btns.='<div class=col-sm-4>';
 $btns.='<a href=#btn class="btn btn-primary" id=btnEdit><i class="fa fa-edit"></i> Edit</a>';
+$btns.='</div>';
+$btns.='<div class="col-sm-8 pull-right">';
+$btns.='<i class="text-muted">Last updated: '.$r['w_updated'].' by '.$r['w_updater'].'</i><br />';
 $btns.='</div>';
 $btns.='</div>';
 

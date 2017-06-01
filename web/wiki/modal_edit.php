@@ -29,7 +29,8 @@ $htm.='</div>';//endrow
 $modal->width(700);
 $modal->body($htm);
 $foot=[];
-$foot[]="<a href=#btn id='btnSave' class='btn btn-primary'><i class='fa fa-save'></i> Save</a>";
-$foot[]="<button type='button' class='btn btn-default' data-dismiss='modal'><i class='fa fa-times'></i> Cancel</button>";
+$foot[]='<a href=#btn id=btnSave class="btn btn-primary"><i class="fa fa-save"></i> Save</a>';
+$foot[]='<a href=#btn id=btnDelete title="Delete" class="btn btn-secondary"><i class="fa fa-trash"></i></a>';
+$foot[]='<button type=button class="btn btn-secondary" data-dismiss=modal><i class="fa fa-times"></i> Cancel</button>';
 $modal->footer($foot);
 echo $modal;

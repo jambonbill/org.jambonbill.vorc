@@ -19,7 +19,7 @@ switch ($_POST['do']) {
     case 'search':
 
     	$WHERE=[];
-    	$WHERE[]='1=1';
+    	$WHERE[]='w_id>0';
 
         if (@$_POST['search']) {
             $WHERE[]='(w_name LIKE '.$VORC->db()->quote("%".$_POST['search']."%").' OR w_slug LIKE '.$VORC->db()->quote("%".$_POST['search']."%").')';

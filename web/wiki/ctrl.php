@@ -41,6 +41,19 @@ switch ($_POST['do']) {
         exit(json_encode($dat));
 
 
+    case 'delete':
+
+        $dat['POST']=$_POST;
+
+        $w_id=$_POST['w_id']*1;
+
+        $sql="UPDATE vorc.wiki SET w_id=-w_id, w_updated=NOW(), w_updater=".$VORC->user_id()." WHERE w_id=$w_id LIMIT 1;";
+        $VORC->db()->query($sql) or die(print_r($VORC->db()->errorInfo(), true) . "<hr />$sql");
+        $dat['deleted']=date('c');
+        exit(json_encode($dat));
+        break;
+
+
     case 'addCategory':
         break;
 

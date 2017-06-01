@@ -14,7 +14,19 @@ $(function(){
 		}).fail(function(e){
 			console.error(e.responseText);
 		});
+
 	});
+
+	$('#boxUrl tbody>tr').click(function(e){
+		console.info('click',e.currentTarget.dataset.id);
+		$('#modalUrl').modal('show');
+	});
+
+
+	function saveUrl(){
+		console.info('saveUrl()');
+	}
+
 
 	$('#btnEdit').click(function(){
 		console.log("edit");
@@ -42,7 +54,7 @@ $(function(){
 		$.post('ctrl.php',p,function(json){
 			$('.overlay').hide();
 			console.log(json);
-			if(json.id){
+			if(json.updated){
 				document.location.reload();
 			}
 		}).fail(function(e){
@@ -50,6 +62,27 @@ $(function(){
 		});
 
 		$('#modalEdit').modal('hide');
+	});
+
+	$('#btnDelete').click(function(){
+		//console.log("save");
+		if(!confirm("Delete this wiki page ?"))return false;
+		var p={
+			'do':'delete',
+			'w_id':$('#w_id').val()
+		}
+
+		$('.overlay').show();
+		$.post('ctrl.php',p,function(json){
+			$('.overlay').hide();
+			console.log(json);
+			if(json.deleted){
+				document.location.href='../wiki_search/';
+			}
+		}).fail(function(e){
+			console.error(e.responseText);
+		});
+
 	});
 
 	$('.overlay').hide();
