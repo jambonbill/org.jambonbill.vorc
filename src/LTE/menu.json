@@ -1,10 +1,35 @@
 {
 
 
-	"archive":{
-   		"icon":"fa fa-archive",
-   		"text":"Archive",
-   		"class":"header",
+
+   "newsep":{
+         "icon":"fa fa-globe",
+         "text":"New WIKI",
+         "class":"header"
+      },
+
+   "wikinew":{
+      "icon":"fa fa-list",
+      "text":"Wiki (new)",
+      "url":"wiki"
+      },
+
+   "wikiSearch":{
+      "icon":"fa fa-search",
+      "text":"Wiki Search",
+      "url":"wiki_search"
+      },
+
+
+   "separator":{
+   		"text":"",
+   		"class":"header"
+   },
+
+   "archive":{
+         "icon":"fa fa-archive",
+         "text":"Archive",
+         "class":"header",
          "sub":{
             "tunes":{
                "icon":"fa fa-music",
@@ -36,47 +61,7 @@
             }
 
          }
-   	},
-
-
-
-
-
-
-   "newsep":{
-         "icon":"fa fa-globe",
-         "text":"New WIKI",
-         "class":"header"
       },
-
-   "wikinew":{
-      "icon":"fa fa-list",
-      "text":"Wiki (new)",
-      "url":"wiki"
-      },
-
-   "wikiSearch":{
-      "icon":"fa fa-search",
-      "text":"Wiki Search",
-      "url":"wiki_search"
-      },
-
-   "wikiCateg":{
-      "icon":"fa fa-list",
-      "text":"Wiki Categories",
-      "url":"wiki_categories"
-      },
-
-   "wikiPlatform":{
-      "icon":"fa fa-list",
-      "text":"Wiki Platforms",
-      "url":"wiki_platforms"
-      },
-
-   "separator":{
-   		"text":"",
-   		"class":"header"
-   },
 
 
    "logout":{
