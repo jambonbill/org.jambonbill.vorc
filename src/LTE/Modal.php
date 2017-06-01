@@ -1,6 +1,6 @@
 <?php
 /**
- * AdminLte2 Modal
+ * AdminLte2 Modal V4
  * https://almsaeedstudio.com/themes/AdminLTE/pages/UI/modals.html
  * to pop the modal -> $("#modalwindow").modal('show');
  * to update the title -> $("#modalwindow .modal-title").html('html');
@@ -109,10 +109,11 @@ Class Modal
         }
 
         $HTML[]='<div class="modal-header">';
-        $HTML[]='<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>';
+
         $HTML[]='<h4 class="modal-title">';
         if($this->icon)$HTML[]='<i class="'.$this->icon().'"></i> ';
         $HTML[]=$this->title().'</h4>';
+        $HTML[]='<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>';
         $HTML[]='</div>';
 
         $HTML[]='<div class="modal-body">'.$this->body().'</div>';
