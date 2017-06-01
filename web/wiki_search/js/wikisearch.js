@@ -19,6 +19,7 @@ $(function(){
 			display();
 
 		}).fail(function(e){
+			$('.overlay').hide();
 			console.error(e.responseText);
 		});
 	}

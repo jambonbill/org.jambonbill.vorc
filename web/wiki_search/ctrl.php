@@ -9,8 +9,8 @@ require __DIR__."/../../vendor/autoload.php";
 
 $VORC=new VORC\Vorc();
 
-$_POST['do']='search';
-$_POST['search']='sid';
+//$_POST['do']='search';
+//$_POST['search']='sid';
 $dat=[];
 $dat['POST']=$_POST;
 switch ($_POST['do']) {

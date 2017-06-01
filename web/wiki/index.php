@@ -29,6 +29,8 @@ if(isset($_GET['slug'])){
 	$sql="SELECT * FROM vorc.wiki WHERE 1=1 ORDER BY RAND() LIMIT 1;";
 	$q=$VORC->db()->query($sql) or die("Error:$sql");
 	$r=$q->fetch(PDO::FETCH_ASSOC);
+	//redirect//
+	header('location: ?id='.$r['w_id']);
 }
 
 if ($r) {
