@@ -94,6 +94,17 @@ class Vorc
     }
 
 
+    public function username($user_id=0)
+    {
+        $user_id*=1;
+        if(!$user_id)return false;
+
+        $sql="SELECT username FROM `jambonbill.org`.auth_user WHERE id=$user_id LIMIT 1;";
+        $q = $this->db->query($sql) or die(print_r($this->db()->errorInfo(), true) . "<hr />$sql");
+        $r=$q->fetch(\PDO::FETCH_ASSOC);
+        return $r['username'];
+
+    }
 
 
     /**
@@ -474,7 +485,7 @@ class Vorc
 
     public function wiki_categories()
     {
-        $sql="SELECT wc_id, wc_name FROM vorc.wiki_category WHERE wc_id>0;";
+        $sql="SELECT wc_id, wc_name FROM vorc.wiki_categories WHERE wc_id>0;";
         $q=$this->db()->query($sql) or die("Error: $sql");
 
         $dat=[];
@@ -487,7 +498,7 @@ class Vorc
 
     public function wiki_platforms()
     {
-        $sql="SELECT wp_id, wp_name FROM vorc.wiki_platform WHERE wp_id>0;";
+        $sql="SELECT wp_id, wp_name FROM vorc.wiki_platforms WHERE wp_id>0;";
         $q=$this->db()->query($sql) or die("Error: $sql");
 
         $dat=[];
@@ -497,12 +508,89 @@ class Vorc
         return $dat;
     }
 
+    public function platformNames()
+    {
+        $sql="SELECT wp_id, wp_name FROM vorc.wiki_platforms WHERE wp_id>0;";
+        $q=$this->db()->query($sql) or die("Error: $sql");
+
+        $dat=[];
+        while($r=$q->fetch(\PDO::FETCH_ASSOC)){
+            $dat[$r['wp_id']]=$r['wp_name'];
+        }
+        return $dat;
+    }
+
+    public function categoryNames()
+    {
+        $sql="SELECT wc_id, wc_name FROM vorc.wiki_categories WHERE wc_id>0;";
+        $q=$this->db()->query($sql) or die("Error: $sql");
+
+        $dat=[];
+        while($r=$q->fetch(\PDO::FETCH_ASSOC)){
+            $dat[$r['wc_id']]=$r['wc_name'];
+        }
+        return $dat;
+    }
+
+
     public function random_slug()
     {
         $sql="SELECT w_slug FROM vorc.wiki WHERE w_slug IS NOT NULL ORDER BY RAND();";
         $q=$this->db()->query($sql) or die("Error: $sql");
         return $r=$q->fetch(\PDO::FETCH_ASSOC);
     }
+
+
+    public function addPlatform($w_id=0, $platform_id=0)
+    {
+        $w_id*=1;
+        $platform_id*=1;
+
+        $sql="INSERT INTO vorc.wiki_platform (wp_wiki_id, wp_platform_id, wp_updated, wp_updater) ";
+        $sql.="VALUES ($w_id, $platform_id,NOW(),".$this->user_id().");";
+        $this->db()->query($sql) or die("Error: $sql");
+
+        return true;
+    }
+
+    public function addCategory($w_id=0, $category_id=0)
+    {
+        $w_id*=1;
+        $category_id*=1;
+
+        $sql="INSERT INTO vorc.wiki_category (wc_wiki_id, wc_category_id, wc_updated, wc_updater) ";
+        $sql.="VALUES ($w_id, $category_id, NOW(),".$this->user_id().");";
+        $this->db()->query($sql) or die(print_r($this->db()->errorInfo(), true) . "<hr />$sql");
+
+        return true;
+    }
+
+    public function pageCategories($w_id=0)
+    {
+        $w_id*=1;
+
+        $sql="SELECT * FROM vorc.wiki_category WHERE wc_wiki_id=$w_id;";
+        $q=$this->db()->query($sql) or die(print_r($this->db()->errorInfo(), true) . "<hr />$sql");
+        $dat=[];
+        while($r=$q->fetch(\PDO::FETCH_ASSOC)){
+            $dat[]=$r;
+        }
+        return $dat;
+    }
+
+    public function pagePlatforms($w_id=0)
+    {
+        $w_id*=1;
+
+        $sql="SELECT * FROM vorc.wiki_platform WHERE wp_wiki_id=$w_id;";
+        $q=$this->db()->query($sql) or die(print_r($this->db()->errorInfo(), true) . "<hr />$sql");
+        $dat=[];
+        while($r=$q->fetch(\PDO::FETCH_ASSOC)){
+            $dat[]=$r;
+        }
+        return $dat;
+    }
+
 
 }
 

@@ -23,13 +23,6 @@ $htm[]="<div class='col-md-2'>";
 $htm[]="<input type='text' class='form-control' placeholder='Search url' id='url'>";
 $htm[]="</div>";
 
-/*
-$htm[]="<div class='col-md-2'>";
-$htm[]="<select class='form-control' id=platform><option value=''>Platform</option>";
-foreach($VORC->platforms() as $val=>$num)$htm[]="<option value='$val'>".ucfirst($val)."</option>";
-$htm[]="</select></div>";
-*/
-
 $htm[]="<div class='col-md-2'>";
 $htm[]="<select class='form-control' id=user><option value=''>By</option>";
 foreach($VORC->newsUsers() as $val)$htm[]="<option value='$val'>".ucfirst($val)."</option>";
@@ -52,7 +45,7 @@ echo $box;
 
 <script>
 $(function(){
-	
+
 	$('#search,#flag_wiki,#user,#date').change(function(){
 		console.log('change');
 		searchNews();

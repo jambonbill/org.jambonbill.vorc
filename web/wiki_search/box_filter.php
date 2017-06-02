@@ -17,7 +17,12 @@ $htm.='<option value="">Select category';
 $categs=$VORC->wiki_categories();
 //print_r($categs);
 foreach($categs as $r){
-	$htm.='<option value="'.$r['wc_id'].'">'.$r['wc_name'];
+	if (isset($_GET['category_id'])&&$_GET['category_id']==$r['wc_id']) {
+		$htm.='<option value="'.$r['wc_id'].'" selected>'.$r['wc_name'];
+	} else {
+		$htm.='<option value="'.$r['wc_id'].'">'.$r['wc_name'];
+	}
+
 }
 $htm.='</select>';
 $htm.='</div>';
@@ -32,7 +37,13 @@ $platforms=$VORC->wiki_platforms();
 $htm.='<select class="form-control" id=platform>';
 $htm.='<option value="">Select platform';
 foreach($platforms as $r){
-	$htm.='<option value="'.$r['wp_id'].'">'.$r['wp_name'];
+	if (isset($_GET['platform_id'])&&$_GET['platform_id']==$r['wp_id']) {
+		$htm.='<option value="'.$r['wp_id'].'" selected>'.$r['wp_name'];
+	} else {
+		$htm.='<option value="'.$r['wp_id'].'">'.$r['wp_name'];
+	}
+
+
 }
 $htm.='</select>';
 $htm.='</div>';

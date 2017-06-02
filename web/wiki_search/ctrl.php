@@ -26,11 +26,13 @@ switch ($_POST['do']) {
         }
 
         if (@$_POST['category']>0) {
-            $WHERE[]='w_category='.$_POST['category'];
+            $_POST['category']*=1;
+            $WHERE[]='w_id IN (SELECT wc_wiki_id FROM vorc.wiki_category WHERE wc_category_id='.$_POST['category'].')';
     	}
 
         if (@$_POST['platform']>0) {
-            $WHERE[]='w_platform='.$_POST['platform'];
+            $_POST['platform']*=1;
+            $WHERE[]='w_id IN (SELECT wp_wiki_id FROM vorc.wiki_platform WHERE wp_platform_id='.$_POST['platform'].')';
         }
 
 
@@ -41,6 +43,9 @@ switch ($_POST['do']) {
 
         $dat['pages']=[];
         while($r=$q->fetch(\PDO::FETCH_ASSOC)){
+            $r['w_updated']=substr($r['w_updated'],0,16);
+            $r['w_slug']=utf8_decode($r['w_slug']);
+            $r['w_name']=utf8_decode($r['w_name']);
             $dat['pages'][]=$r;
         }
         $JSON=json_encode($dat);

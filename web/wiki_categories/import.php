@@ -1,5 +1,5 @@
 <?php
-// IMPORT CATEGORIES
+// migrate
 header('Content-Type: text/html; charset=utf-8');
 session_start();
 
@@ -10,13 +10,40 @@ echo $admin;
 
 $VORC=new VORC\Vorc();
 
-exit('Uncomment me if you know what you are doing');
 
-$CATEGS=$VORC->categories();
-echo "<pre>";print_r($CATEGS);
+//GET CATEGORIES
+$categs=[];
+foreach($VORC->wiki_categories() as $k=>$v){
+	$categs[$v['wc_name']]=$v['wc_id'];
+}
+//print_r($categs);exit;
+$platforms=[];
+foreach($VORC->wiki_platforms() as $k=>$v){
+	//$categs[$v['wc_name']]=$v['wc_id'];
+	$platforms[$v['wp_name']]=$v['wp_id'];
+}
+//print_r($platforms);exit;
 
-foreach($CATEGS as $categ=>$num){
-	$sql="INSERT INTO vorc.wiki_category (wc_name, wc_updated) VALUES ('$categ', NOW());";
-	$VORC->db()->query($sql) or die("Error:".print_r($VORC->db()->errorInfo(), true)."<hr />$sql");
-	echo "<li>$sql";
+$sql="SELECT w_id, flag_platform, flag_category FROM vorc.wiki;";
+$q=$VORC->db()->query($sql) or die("Error");
+
+while($r=$q->fetch()){
+	//print_r($r);
+	$fplatforms=explode(';',$r['flag_platform']);
+	$fcategories=explode(';',$r['flag_category']);
+	/*
+	foreach($fplatforms as $str){
+		if(!$str)continue;
+		echo "<li>$str - #".$platforms[$str];
+		$VORC->addPlatform($r['w_id'],$platforms[$str]);
+	}
+	*/
+	/*
+	foreach($fcategories as $str){
+		if(!$str)continue;
+		echo "<li>$str - #".$categs[$str];
+		$VORC->addCategory($r['w_id'],$categs[$str]);
+	}
+	*/
+	//echo "<br />";
 }

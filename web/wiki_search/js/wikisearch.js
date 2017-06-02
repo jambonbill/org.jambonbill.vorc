@@ -31,9 +31,10 @@ $(function(){
 		var htm='<table class="table table-sm table-hover" style="cursor:pointer">';
 		htm+='<thead>';
 		htm+='<th width=30>#</th>';
-		htm+='<th>Slug</th>';
+
 		htm+='<th>Name</th>';
-		htm+='<th width=150>Updated</th>';
+		htm+='<th class="hidden-xs-down">Slug</th>';
+		htm+='<th class="hidden-sm-down" width=150>Updated</th>';
 		htm+='</thead>';
 		htm+='<tbody>';
 		var num=0;
@@ -42,11 +43,16 @@ $(function(){
 			//console.log(page);
 			htm+='<tr data-id="'+o.w_id+'">';
 			htm+='<td><i class="text-muted">'+o.w_id;
-			htm+='<td><i class="text-muted">';
+
+			htm+='<td>'+o.w_name;
+
+			htm+='<td class="hidden-xs-down">';
+			htm+='<i class="text-muted">';
 			if(o.w_slug)htm+=o.w_slug;
 			else htm+='-</i>';
-			htm+='<td>'+o.w_name;
-			htm+='<td style="text-align:right">'+o.w_updated;
+
+			htm+='<td style="text-align:right" class="hidden-sm-down">';
+			htm+='<i class="text-muted">'+o.w_updated+'</i>';
 			num++;
 		}
 		htm+='</tbody>';
@@ -74,4 +80,5 @@ $(function(){
 	});
 
 	$('.overlay').hide();
+	search();
 });
