@@ -149,7 +149,7 @@ class Vorc
 
     public function categories()
     {
-        $sql="SELECT DISTINCT vorc.flag_category FROM vorc.wiki_en WHERE 1;";
+        $sql="SELECT DISTINCT flag_category FROM vorc.wiki_en WHERE 1;";
         $q=$this->db()->query($sql) or die("Error: $sql");
         $categs=[];
         while($r=$q->fetch()){
@@ -166,7 +166,7 @@ class Vorc
 
     public function platforms()
     {
-        $sql="SELECT DISTINCT vorc.flag_platform FROM vorc.wiki_en WHERE 1;";
+        $sql="SELECT DISTINCT flag_platform FROM vorc.wiki_en WHERE 1;";
         $q=$this->db()->query($sql) or die("Error: $sql");
         $dat=[];
         while($r=$q->fetch()){
