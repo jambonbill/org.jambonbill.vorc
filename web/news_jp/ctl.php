@@ -8,24 +8,24 @@ require __DIR__."/../../vendor/autoload.php";
 $VORC=new VORC\Vorc();
 
 switch ($_POST['do']) {
-	
+
 	case 'search':
 
 		//print_r($_POST);
-		
+
 		$WHERE=[];
 		$WHERE[]='1=1';
 		$WHERE[]='newsbody<>""';
 		if($_POST['search']){
 			$WHERE[]='(title LIKE '.$VORC->db()->quote($_POST['search']).' OR newsbody LIKE '.$VORC->db()->quote($_POST['search']).')';
 		}
-		
+
 		if($_POST['flag_wiki'])$WHERE[]='flag_wiki LIKE "%'.$_POST['flag_wiki'].'%" ';
 		if($_POST['user'])$WHERE[]='user_modified LIKE "'.$_POST['user'].'" ';
 		$WHERE=implode(' AND ',$WHERE);
-		
+
 		// FIND //
-		$sql ="SELECT * FROM news_jp WHERE $WHERE ORDER BY user_modified DESC;";
+		$sql ="SELECT * FROM vorc.news_jp WHERE $WHERE ORDER BY user_modified DESC;";
 		//echo "<pre>$sql</pre>";
 
 		$q=$VORC->db()->query($sql) or die("Error:".print_r($VORC->db()->errorInfo(), true)."<hr />$sql");
@@ -58,7 +58,7 @@ switch ($_POST['do']) {
 		echo implode('',$htm);
 		exit;
 		break;
-	
+
 	default:
 		# code...
 		break;

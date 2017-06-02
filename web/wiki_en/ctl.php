@@ -8,11 +8,11 @@ require __DIR__."/../../vendor/autoload.php";
 $VORC=new VORC\Vorc();
 
 switch ($_POST['do']) {
-	
+
 	case 'search':
 
 		//print_r($_POST);
-		
+
 		$WHERE=[];
 		$WHERE[]='1=1';
 		if($_POST['search'])$WHERE[]='name_wikipage LIKE "%'.$_POST['search'].'%" ';
@@ -22,9 +22,9 @@ switch ($_POST['do']) {
 			$WHERE[]='(user_created LIKE "'.$_POST['user'].'" OR user_modified LIKE "'.$_POST['user'].'" )';
 		}
 		$WHERE=implode(' AND ',$WHERE);
-		
+
 		// FIND //
-		$sql ="SELECT * FROM wiki_en WHERE $WHERE ORDER BY user_modified DESC;";
+		$sql ="SELECT * FROM vorc.wiki_en WHERE $WHERE ORDER BY user_modified DESC;";
 		//echo "<pre>$sql</pre>";
 
 		$q=$VORC->db()->query($sql) or die("Error:".print_r($VORC->db()->errorInfo(), true)."<hr />$sql");
@@ -55,7 +55,7 @@ switch ($_POST['do']) {
 		echo implode('',$htm);
 		exit;
 		break;
-	
+
 	default:
 		# code...
 		break;

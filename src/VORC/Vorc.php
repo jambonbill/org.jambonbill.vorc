@@ -123,7 +123,7 @@ class Vorc
 
     public function wikiJpUsers()
     {
-        $sql="SELECT DISTINCT user_created FROM wiki_jp WHERE 1 ORDER BY user_created;";
+        $sql="SELECT DISTINCT user_created FROM vorc.wiki_jp WHERE 1 ORDER BY user_created;";
         $q=$this->db()->query($sql) or die("Error: $sql");
         $dat=[];
         while($r=$q->fetch()){
@@ -135,7 +135,7 @@ class Vorc
 
     public function wikiUsers()
     {
-        $sql="SELECT DISTINCT user_created FROM wiki_en WHERE 1 ORDER BY user_created;";
+        $sql="SELECT DISTINCT user_created FROM vorc.wiki_en WHERE 1 ORDER BY user_created;";
         $q=$this->db()->query($sql) or die("Error: $sql");
         $dat=[];
         while($r=$q->fetch()){
@@ -149,7 +149,7 @@ class Vorc
 
     public function categories()
     {
-        $sql="SELECT DISTINCT vorc.flag_category FROM wiki_en WHERE 1;";
+        $sql="SELECT DISTINCT vorc.flag_category FROM vorc.wiki_en WHERE 1;";
         $q=$this->db()->query($sql) or die("Error: $sql");
         $categs=[];
         while($r=$q->fetch()){
@@ -166,7 +166,7 @@ class Vorc
 
     public function platforms()
     {
-        $sql="SELECT DISTINCT vorc.flag_platform FROM wiki_en WHERE 1;";
+        $sql="SELECT DISTINCT vorc.flag_platform FROM vorc.wiki_en WHERE 1;";
         $q=$this->db()->query($sql) or die("Error: $sql");
         $dat=[];
         while($r=$q->fetch()){

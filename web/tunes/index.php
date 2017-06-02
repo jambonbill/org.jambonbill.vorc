@@ -10,8 +10,8 @@ echo $admin;
 
 $VORC=new VORC\Vorc();
 
-$sql="SELECT COUNT(*) FROM tune_index;";
-$q=$VORC->db()->query($sql) or die("Error:$sql"); 
+$sql="SELECT COUNT(*) FROM vorc.tune_index;";
+$q=$VORC->db()->query($sql) or die("Error:$sql");
 $COUNT=$q->fetch()[0];
 //print_r($r);
 ?>

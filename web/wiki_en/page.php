@@ -12,7 +12,7 @@ echo $admin;
 $VORC=new VORC\Vorc();
 
 $id=$_GET['id']*1;
-$sql="SELECT * FROM wiki_en WHERE id=$id;";
+$sql="SELECT * FROM vorc.wiki_en WHERE id=$id;";
 $q=$VORC->db()->query($sql) or die("Error: $sql");
 $r=$q->fetch(PDO::FETCH_ASSOC);
 
@@ -26,16 +26,16 @@ if(!$r)die("Error : Wiki page not found");
 <?php
 /*
 id	varchar(14)
-name_wikipage	text	
-name_alias	tinytext	
-lastupdate	varchar(14)	
-contents	mediumtext	
-flag_public	tinyint(4)			
-flag_freeze	tinyint(4)			
-flag_category	tinytext	
-user_created	tinytext	
-user_modified	tinytext	
-flag_platform	tinytext	
+name_wikipage	text
+name_alias	tinytext
+lastupdate	varchar(14)
+contents	mediumtext
+flag_public	tinyint(4)
+flag_freeze	tinyint(4)
+flag_category	tinytext
+user_created	tinytext
+user_modified	tinytext
+flag_platform	tinytext
 flag_system	tinyint(1)
 ex_url
 */
