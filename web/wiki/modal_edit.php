@@ -26,7 +26,7 @@ $htm.='</div>';
 
 $htm.='</div>';//endrow
 
-$modal->width(700);
+//$modal->width(700);
 $modal->body($htm);
 $foot=[];
 $foot[]='<a href=#btn id=btnSave class="btn btn-primary"><i class="fa fa-save"></i> Save</a>';
