@@ -17,6 +17,7 @@
         "php": ">=5.5.9",
         "monolog/monolog": "~1.1",
         "erusev/parsedown": "~1.4",
+        "phpmailer/phpmailer":"~5.2",
         "ext-pdo": "*"
     }
 }
