@@ -9,7 +9,7 @@ $htm.='<input class="form-control" placeholder=search id=search>';
 $htm.='</div>';
 $htm.='</div>';
 
-$htm.='<div class=col-sm-4>';
+$htm.='<div class="col-sm-4">';
 $htm.='<div class=form-group>';
 $htm.='<label>Category</label>';
 $htm.='<select class="form-control" id=category>';
@@ -28,8 +28,7 @@ $htm.='</select>';
 $htm.='</div>';
 $htm.='</div>';
 
-
-$htm.='<div class=col-sm-4>';
+$htm.='<div class="col-sm-4">';
 $htm.='<div class=form-group>';
 $htm.='<label>Platform</label>';
 $platforms=$VORC->wiki_platforms();
@@ -61,7 +60,7 @@ $box->id('boxSearch');
 $box->icon('fa fa-search');
 $box->title('Search wiki');
 $box->body($htm);
-//$box->footer('<a href=# class="btn btn-default"><i class="fa fa-times"></i> Save</a>');
+$box->footer('<a href=stats.php class="btn btn-default"><i class="fa fa-line-chart"></i> Stats</a>');
 $box->collapsable(1);
 $box->loading(1);
 echo $box;

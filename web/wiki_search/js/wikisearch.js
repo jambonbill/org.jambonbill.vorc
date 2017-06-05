@@ -60,6 +60,8 @@ $(function(){
 
 		if(num==0){
 			htm+='<pre><i class="fa fa-warning"></i> no data!</pre>';
+		}else{
+			htm+='<i>'+num+' wiki page(s)</i>';
 		}
 
 		$('#boxResults .box-body').html(htm);
