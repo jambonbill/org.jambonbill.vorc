@@ -163,15 +163,15 @@ class UserDjango
     public function djangoSessionRegister($session_id = '', $userid = 0)
     {
         $userid*=1;
-
         //echo "djangoSessionRegister( $session_id, $userid);";
         $session_id=session_id();
 
         $sql = "INSERT IGNORE INTO django_session ( session_key, session_data, expire_date ) ";
         $sql.= "VALUES ('$session_id','$userid', NOW());";
-
         $this->db->query($sql) or die( print_r($this->db->errorInfo()) );
 
+        $sql = "UPDATE auth_user SET last_login=NOW() WHERE id='$user_id' LIMIT 1;";
+        $this->db->query($sql) or die( print_r($this->db->errorInfo()) );
         return true;
     }
 
